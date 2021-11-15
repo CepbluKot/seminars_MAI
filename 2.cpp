@@ -214,7 +214,7 @@ int main()
     arint.setter(1, 0);
     arint.setter(2, 1);
     arint.setter(3, 2);
-    // std::string *summ = sum(&array, &array_s);
+    
     array.beyond('w');
     arint.show();
     array.show();
