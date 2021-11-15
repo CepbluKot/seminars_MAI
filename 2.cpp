@@ -2,6 +2,7 @@
 #include <stdlib.h>
 class Massiv
 {
+    
 private:
     int len;
     int *array;
@@ -59,13 +60,12 @@ public:
         }
     }
 
-    void getter(int getterIndex)
+    int getter(int getterIndex)
     {
         try
         {
             if (getterIndex < len)
-                std::cout << "\n"
-                          << ptr[getterIndex];
+                return ptr[getterIndex];
         }
         catch (const std::out_of_range &e)
         {
@@ -87,7 +87,7 @@ public:
                 if (to.ptr[i] != from.ptr[i])
                 {
                     success = false;
-                    break;
+                    break;int len;
                 }
                 std::cout << "\nsuccess: " << success << std::endl;
             }
@@ -119,20 +119,26 @@ public:
             }
         }
     }
+    int getLen()
+    {
+        return len;
+    }
+};
 
-    int *sum(Massiv *array1, Massiv *array2)
+
+int *sum(Massiv *array1, Massiv *array2)
     {
         bool success = true;
         try
         {
-            int *arrayFullSum = (int *)malloc(array1->len * sizeof(int));
-            for (int i = 0; i < array1->len; i++)
+            int *arrayFullSum = (int *)malloc(array1->getLen() * sizeof(int));
+            for (int i = 0; i < array1->getLen(); i++)
             {
-                arrayFullSum[i] = array1->ptr[i] + array2->ptr[i];
+                arrayFullSum[i] = array1->getter(i) + array2->getter(i);
             }
-            for (int i = 0; i < array1->len; i++)
+            for (int i = 0; i < array1->getLen(); i++)
             {
-                if (arrayFullSum[i] != array1->ptr[i] + array2->ptr[i])
+                if (arrayFullSum[i] != array1->getter(i) + array2->getter(i))
                 {
                     success = false;
                     break;
@@ -145,17 +151,26 @@ public:
         {
             std::cerr << "\nbad_alloc: " << e.what() << '\n';
         }
+
     }
-};
+
 
 int main()
 {
     Massiv array(5);
+    Massiv array_s(5);
+    
 
     for (int i = 0; i < 5; i++)
     {
         array.setter(i, i);
+        array_s.setter(i, i);
     }
+    int* summ = sum(&array, &array_s);
     array.beyond(99);
     array.show();
+    for (int i = 0; i < 5; i++)
+    {
+        std::cout<<"\n"<<summ[i];
+    }
 }
