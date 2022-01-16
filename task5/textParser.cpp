@@ -117,7 +117,9 @@ void query(std::string elem, hashTable<std::string> *table)
     {
         table->add(elem);
         std::cout<<" ^^^ [ADDED 1 TO COUNT FOR THIS ELEMENT] "<<std::endl;
-
+        std::cout<<"[RESULT] ";
+        findElem(elem, table);
+        std::cout<<std::endl;
     }
 }
 
