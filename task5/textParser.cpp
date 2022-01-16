@@ -130,7 +130,8 @@ int main(int argc, char **argv)
 
     hashTable<std::string> *table = new hashTable<std::string>(10);
     wordsToList(fullText, table);
-    // printResult(table);
+    printResult(table);
+    std::cout<<std::endl;
     query("Half-Life", table);
     query("Half-Life", table);
 }
